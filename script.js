@@ -1969,19 +1969,6 @@ all('.cohri-choice').forEach(input => input.addEventListener('change', () => {
 all('.vitals-input, .cohri-panel .cohri-details').forEach(input => input.addEventListener('input', refreshRecallNote));
 updateRecallCOHRI();
 
-document.addEventListener('keydown', event => {
-  if (event.ctrlKey || event.metaKey || event.altKey || event.repeat || event.isComposing) return;
-  const row = event.target.closest?.('.cohri-panel .cohri-row');
-  if (!row || event.target.matches('input[type="text"], textarea, select')) return;
-  const key = event.key.toLowerCase();
-  if (!['n', 'y'].includes(key)) return;
-  const options = row.querySelectorAll('.cohri-choice');
-  const option = options[key === 'n' ? 0 : 1];
-  if (!option) return;
-  event.preventDefault();
-  option.click();
-});
-
 all('.oral-screening-choice').forEach(input => input.addEventListener('change', () => {
   updateOralScreening();
   if (input.value === 'yes') byId(input.getAttribute('aria-controls')).focus();
@@ -1998,14 +1985,6 @@ all('.eo-choice').forEach(input => input.addEventListener('change', () => {
   renderChart(); saveOdontogram();
 }));
 all('.extra-oral-details, #extraOralExam').forEach(input => input.addEventListener('input', refreshRecallNote));
-all('.extra-oral-row').forEach(row => { row.tabIndex = 0; });
-document.addEventListener('keydown', event => {
-  if (event.key.toLowerCase() !== 'n' || event.ctrlKey || event.metaKey || event.altKey || event.repeat || event.isComposing) return;
-  const row = event.target.closest?.('.extra-oral-row');
-  if (!row || event.target.matches('input[type="text"], textarea, select')) return;
-  event.preventDefault(); row.querySelector('.eo-choice[value="no"]').click();
-  const rows = [...all('.extra-oral-row')]; rows[rows.indexOf(row)+1]?.focus();
-});
 updateExtraOralFields();
 
 function updateSpecificPAs() {
@@ -2054,3 +2033,25 @@ function refreshRecallNote() {
   renderChart();
   saveOdontogram();
 }
+
+// Select Yes/No by value and advance through the visible form rows.
+const recallYesNoRows = '.cohri-panel .cohri-row, .cleaning-option-row, .extra-oral-row, .oral-screening-row';
+all(recallYesNoRows).forEach(row => {
+  if (row.querySelector('input[type="radio"]')) row.tabIndex = 0;
+});
+document.addEventListener('keydown', event => {
+  const key = event.key.toLowerCase();
+  if (!['n','y'].includes(key) || event.ctrlKey || event.metaKey || event.altKey || event.repeat || event.isComposing) return;
+  const target = event.target;
+  if (!(target instanceof Element) || target.closest('textarea, select, input:not([type="radio"]):not([type="checkbox"]), [contenteditable="true"]')) return;
+  const row = target.closest(recallYesNoRows);
+  if (!row || row.closest('[hidden]')) return;
+  const values = key === 'n' ? ['no','no-change','none'] : ['yes','change'];
+  const option = [...row.querySelectorAll('input[type="radio"]')].find(input => values.includes(input.value));
+  if (!option || option.disabled) return;
+  event.preventDefault(); event.stopImmediatePropagation();
+  option.click();
+  const rows = [...all(recallYesNoRows)].filter(item => item.querySelector('input[type="radio"]') && !item.closest('[hidden]') && item.getClientRects().length);
+  const next = rows[rows.indexOf(row)+1];
+  if (next) next.focus();
+}, true);

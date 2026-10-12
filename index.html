@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recall</title>
+  <link rel="stylesheet" href="style.css?v=4feea9379b">
+</head>
+<body>
+  <div class="recall-type-row">
+    <label for="recallType">Type of Recall</label>
+    <select id="recallType">
+      <option value="">Choose type of recall</option>
+      <option value="Prophy adult/ POE">Prophy adult/ POE</option>
+      <option value="Prophy child/POE">Prophy child/POE</option>
+      <option value="Perio maintenance/CPE">Perio maintenance/CPE</option>
+      <option value="TPP and Prophy">TPP and Prophy</option>
+      <option value="Only prophy">Only prophy</option>
+    </select>
+    <label class="meet-greet-option"><input id="meetAndGreet" type="checkbox"> Meet and Greet</label>
+  </div>
+    <section class="clinical-panel vitals-panel cohri-panel" aria-labelledby="cohriHeading">
+      <h2 id="cohriHeading">COHRI</h2>
+      <div class="cohri-row">
+        <span class="cohri-label">Vitals</span>
+        <div class="vitals-fields">
+        <label class="vital-field" for="vitalBP">BP
+          <input id="vitalBP" class="vitals-input" data-vital="bp" type="text" inputmode="text" aria-describedby="bpUnit">
+          <span id="bpUnit">mmHg</span>
+        </label>
+        <label class="vital-field" for="vitalPulse">Pulse
+          <input id="vitalPulse" class="vitals-input" data-vital="pulse" type="text" inputmode="numeric" aria-describedby="pulseUnit">
+          <span id="pulseUnit">bpm</span>
+        </label>
+        <label class="vital-field" for="vitalTemperature">Temperature
+          <input id="vitalTemperature" class="vitals-input" data-vital="temperature" type="text" inputmode="decimal" aria-describedby="temperatureUnit">
+          <span id="temperatureUnit">°F</span>
+        </label>
+        </div>
+      </div>
+      <div class="cohri-row" role="group" aria-labelledby="historyLabel">
+        <span class="cohri-label" id="historyLabel">Update medical and dental history</span>
+        <label class="cohri-option"><input class="cohri-choice" type="radio" name="cohri-history" value="no-change" checked aria-keyshortcuts="N" title="Press N to select this option in the focused line"> No change</label>
+        <label class="cohri-option"><input class="cohri-choice" type="radio" name="cohri-history" value="change" aria-controls="historyDetails" aria-keyshortcuts="Y" title="Press Y to select this option in the focused line"> Change</label>
+        <input id="historyDetails" class="cohri-details" type="text" aria-label="Update medical and dental history details" hidden>
+      </div>
+      <div class="cohri-row" role="group" aria-labelledby="medicationLabel">
+        <span class="cohri-label" id="medicationLabel">Update medication</span>
+        <label class="cohri-option"><input class="cohri-choice" type="radio" name="cohri-medication" value="no-change" checked aria-keyshortcuts="N" title="Press N to select this option in the focused line"> No change</label>
+        <label class="cohri-option"><input class="cohri-choice" type="radio" name="cohri-medication" value="change" aria-controls="medicationDetails" aria-keyshortcuts="Y" title="Press Y to select this option in the focused line"> Change</label>
+        <input id="medicationDetails" class="cohri-details" type="text" aria-label="Update medication details" hidden>
+      </div>
+      <div class="cohri-row" role="group" aria-labelledby="premedicationLabel">
+        <span class="cohri-label" id="premedicationLabel">Premedication</span>
+        <label class="cohri-option"><input class="cohri-choice" type="radio" name="cohri-premedication" value="none" checked aria-keyshortcuts="N" title="Press N to select this option in the focused line"> None</label>
+        <label class="cohri-option"><input class="cohri-choice" type="radio" name="cohri-premedication" value="yes" aria-controls="premedicationDetails" aria-keyshortcuts="Y" title="Press Y to select this option in the focused line"> Yes</label>
+        <input id="premedicationDetails" class="cohri-details" type="text" aria-label="Premedication details" hidden>
+      </div>
+    </section>
+  <section class="cleaning-panel" aria-labelledby="cleaningHeading">
+    <h2 id="cleaningHeading">Cleaning</h2>
+    <div class="cleaning-option-row" role="group" aria-labelledby="cleaning-cavitron-label">
+      <span id="cleaning-cavitron-label" class="cleaning-option-label">Cavitron used</span>
+      <label><input class="cleaning-choice" type="radio" name="cleaning-cavitron" value="yes"> Yes</label>
+      <label><input class="cleaning-choice" type="radio" name="cleaning-cavitron" value="no"> No</label>
+    </div>
+    <div class="cleaning-option-row" role="group" aria-labelledby="cleaning-handscaler-label">
+      <span id="cleaning-handscaler-label" class="cleaning-option-label">204S handscaler used</span>
+      <label><input class="cleaning-choice" type="radio" name="cleaning-handscaler" value="yes"> Yes</label>
+      <label><input class="cleaning-choice" type="radio" name="cleaning-handscaler" value="no"> No</label>
+    </div>
+    <div class="cleaning-option-row" role="group" aria-labelledby="cleaning-prophyWiz-label">
+      <span id="cleaning-prophyWiz-label" class="cleaning-option-label">Prophy Wiz used</span>
+      <label><input class="cleaning-choice" type="radio" name="cleaning-prophyWiz" value="yes"> Yes</label>
+      <label><input class="cleaning-choice" type="radio" name="cleaning-prophyWiz" value="no"> No</label>
+    </div>
+    <div class="cleaning-option-row" role="group" aria-labelledby="cleaning-floss-label">
+      <span id="cleaning-floss-label" class="cleaning-option-label">Floss string</span>
+      <label><input class="cleaning-choice" type="radio" name="cleaning-floss" value="yes"> Yes</label>
+      <label><input class="cleaning-choice" type="radio" name="cleaning-floss" value="no"> No</label>
+      <label><input class="cleaning-floss-choice" type="checkbox" value="Interproximal floss"> Interproximal floss</label>
+      <label><input class="cleaning-floss-choice" type="checkbox" value="Superfloss"> Superfloss</label>
+    </div>
+    <div class="cleaning-option-row" role="group" aria-labelledby="cleaning-fluoride-label">
+      <span id="cleaning-fluoride-label" class="cleaning-option-label">Topical fluoride varnish</span>
+      <label><input class="cleaning-choice" type="radio" name="cleaning-fluoride" value="yes"> Yes</label>
+      <label><input class="cleaning-choice" type="radio" name="cleaning-fluoride" value="no"> No</label>
+    </div>
+  </section>
+    <section class="clinical-panel treatment-provided exam-area extra-oral-exam" aria-labelledby="extraOralHeading">
+      <h2 id="extraOralHeading">Extra-oral screening</h2>
+<fieldset class="extra-oral-group"><legend>TMJ</legend><div class="cohri-row extra-oral-row" role="group" aria-labelledby="eo-label-tmjTenderness"><span id="eo-label-tmjTenderness" class="extra-oral-label">Tenderness</span><label class="cohri-option"><input class="eo-choice" type="radio" name="eo-tmjTenderness" value="no" aria-keyshortcuts="N" title="Press N to select No and move to the next line">No</label><label class="cohri-option"><input class="eo-choice" type="radio" name="eo-tmjTenderness" value="yes" aria-controls="eo-details-tmjTenderness">Yes</label><input id="eo-details-tmjTenderness" class="cohri-details extra-oral-details" type="text" aria-label="Tenderness details" hidden></div><div class="cohri-row extra-oral-row" role="group" aria-labelledby="eo-label-tmjSounds"><span id="eo-label-tmjSounds" class="extra-oral-label">Clicking/popping sound</span><label class="cohri-option"><input class="eo-choice" type="radio" name="eo-tmjSounds" value="no" aria-keyshortcuts="N" title="Press N to select No and move to the next line">No</label><label class="cohri-option"><input class="eo-choice" type="radio" name="eo-tmjSounds" value="yes" aria-controls="eo-details-tmjSounds">Yes</label><input id="eo-details-tmjSounds" class="cohri-details extra-oral-details" type="text" aria-label="Clicking/popping sound details" hidden></div><div class="cohri-row extra-oral-row" role="group" aria-labelledby="eo-label-mandibularFunction"><span id="eo-label-mandibularFunction" class="extra-oral-label">Difficulty on mandibular function</span><label class="cohri-option"><input class="eo-choice" type="radio" name="eo-mandibularFunction" value="no" aria-keyshortcuts="N" title="Press N to select No and move to the next line">No</label><label class="cohri-option"><input class="eo-choice" type="radio" name="eo-mandibularFunction" value="yes" aria-controls="eo-details-mandibularFunction">Yes</label><input id="eo-details-mandibularFunction" class="cohri-details extra-oral-details" type="text" aria-label="Difficulty on mandibular function details" hidden></div><div class="cohri-row extra-oral-row" role="group" aria-labelledby="eo-label-deviation"><span id="eo-label-deviation" class="extra-oral-label">Deviations when the mouth is opening/closing</span><label class="cohri-option"><input class="eo-choice" type="radio" name="eo-deviation" value="no" aria-keyshortcuts="N" title="Press N to select No and move to the next line">No</label><label class="cohri-option"><input class="eo-choice" type="radio" name="eo-deviation" value="yes" aria-controls="eo-details-deviation">Yes</label><input id="eo-details-deviation" class="cohri-details extra-oral-details" type="text" aria-label="Deviations when the mouth is opening/closing details" hidden></div></fieldset><fieldset class="extra-oral-group"><legend>Head and neck</legend><div class="cohri-row extra-oral-row" role="group" aria-labelledby="eo-label-muscleTenderness"><span id="eo-label-muscleTenderness" class="extra-oral-label">Tenderness on muscles of mastication</span><label class="cohri-option"><input class="eo-choice" type="radio" name="eo-muscleTenderness" value="no" aria-keyshortcuts="N" title="Press N to select No and move to the next line">No</label><label class="cohri-option"><input class="eo-choice" type="radio" name="eo-muscleTenderness" value="yes" aria-controls="eo-details-muscleTenderness">Yes</label><input id="eo-details-muscleTenderness" class="cohri-details extra-oral-details" type="text" aria-label="Tenderness on muscles of mastication details" hidden></div><div class="cohri-row extra-oral-row" role="group" aria-labelledby="eo-label-lymphadenopathy"><span id="eo-label-lymphadenopathy" class="extra-oral-label">Lymphadenopathy on neck and head</span><label class="cohri-option"><input class="eo-choice" type="radio" name="eo-lymphadenopathy" value="no" aria-keyshortcuts="N" title="Press N to select No and move to the next line">No</label><label class="cohri-option"><input class="eo-choice" type="radio" name="eo-lymphadenopathy" value="yes" aria-controls="eo-details-lymphadenopathy">Yes</label><input id="eo-details-lymphadenopathy" class="cohri-details extra-oral-details" type="text" aria-label="Lymphadenopathy on neck and head details" hidden></div><div class="cohri-row extra-oral-row" role="group" aria-labelledby="eo-label-softTissue"><span id="eo-label-softTissue" class="extra-oral-label">Scars/ current injuries/moles/soft tissue findings</span><label class="cohri-option"><input class="eo-choice" type="radio" name="eo-softTissue" value="no" aria-keyshortcuts="N" title="Press N to select No and move to the next line">No</label><label class="cohri-option"><input class="eo-choice" type="radio" name="eo-softTissue" value="yes" aria-controls="eo-details-softTissue">Yes</label><input id="eo-details-softTissue" class="cohri-details extra-oral-details" type="text" aria-label="Scars/ current injuries/moles/soft tissue findings details" hidden></div></fieldset>
+      <label for="extraOralExam" class="extra-oral-notes-label">Additional findings</label>
+      <textarea id="extraOralExam" class="cohri-details exam-notes" rows="2" aria-label="Extra-oral screening findings"></textarea>
+    </section>
+
+  <div id="recallEvaluationArea" class="odontogram-grid" aria-labelledby="recallEvaluationHeading" hidden>
+    <h2 id="recallEvaluationHeading" hidden></h2>
+    <div class="recall-radiographs" role="group" aria-labelledby="recallRadiographLabel">
+      <span id="recallRadiographLabel"><span aria-hidden="true">☢</span> Radiograph taken</span>
+      <label><input class="recall-radiograph" type="checkbox" value="PANO"> PANO</label>
+      <label><input class="recall-radiograph" type="checkbox" value="4BWs"> 4BWs</label>
+      <label><input class="recall-radiograph" type="checkbox" value="2BWs"> 2BWs</label>
+      <div class="specific-pa-option">
+        <label><input id="specificPAs" class="recall-radiograph" type="checkbox" value="specific PAs" aria-controls="specificPADetails"> specific PAs</label>
+        <input id="specificPADetails" type="text" aria-label="Specific PAs details" hidden>
+      </div>
+    </div>
+
+    <div class="recall-dentition-occlusion">
+<fieldset class="extra-oral-group recall-dentition-group"><legend>Dentition</legend><div class="rx-dentition-lines"><div class="rx-dentition-row" role="group" aria-label="Maxillae dentition"><span>Maxillae</span><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-maxillae" data-jaw="maxillae" value="Full permanent">Full permanent</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-maxillae" data-jaw="maxillae" value="Partially dentate">Partially dentate</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-maxillae" data-jaw="maxillae" value="Partially edentulous">Partially edentulous</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-maxillae" data-jaw="maxillae" value="Edentulous">Edentulous</label></div><div class="rx-dentition-row" role="group" aria-label="Mandible dentition"><span>Mandible</span><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-mandible" data-jaw="mandible" value="Full permanent">Full permanent</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-mandible" data-jaw="mandible" value="Partially dentate">Partially dentate</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-mandible" data-jaw="mandible" value="Partially edentulous">Partially edentulous</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-mandible" data-jaw="mandible" value="Edentulous">Edentulous</label></div></div></fieldset>
+      <fieldset class="extra-oral-group io-group occlusal-classification"><legend>Occlusal classification</legend>
+        <div class="occlusion-layout"><div class="occlusion-main">
+        <div class="cohri-row"><label for="ioOcclusalClass">Class <select id="ioOcclusalClass" class="io-occlusion-input" data-occlusion="class"><option value="">Choose Class</option><option value="I">I</option><option value="II">II</option><option value="III">III</option><option value="Mesial step">Mesial step</option><option value="Flush terminal plane">Flush terminal plane</option><option value="Distal step">Distal step</option></select> <select id="ioClassDivision" class="io-occlusion-input" data-occlusion="division" aria-label="Class II division" hidden><option value="">Choose division</option><option value="Division 1">Division 1</option><option value="Division 2">Division 2</option></select></label>
+        <label for="ioOverbite">Overbite <input id="ioOverbite" class="cohri-details io-occlusion-input" data-occlusion="overbite" type="text" inputmode="decimal" aria-describedby="ioOverbiteUnit"> <span id="ioOverbiteUnit">%</span></label>
+        <label for="ioOverjet">Overjet <input id="ioOverjet" class="cohri-details io-occlusion-input" data-occlusion="overjet" type="text" inputmode="decimal" aria-describedby="ioOverjetUnit"> <span id="ioOverjetUnit">mm</span></label></div>
+        <div id="ioClassLaterality" class="cohri-row io-class-conditional" role="group" aria-label="Class distribution" hidden>
+          <label class="cohri-option"><input class="io-class-choice" type="radio" name="io-class-laterality" value="bilateral">Bilateral</label>
+          <label class="cohri-option"><input class="io-class-choice" type="radio" name="io-class-laterality" value="unilateral">Unilateral</label>
+          <span id="ioClassSide" class="io-class-conditional" role="group" aria-label="Unilateral class side" hidden><label class="cohri-option"><input class="io-class-choice" type="radio" name="io-class-side" value="right">Right</label><label class="cohri-option"><input class="io-class-choice" type="radio" name="io-class-side" value="left">Left</label></span>
+        </div>
+        <div id="ioRemainingClassRow" class="cohri-row io-class-conditional" hidden><label for="ioRemainingClass" id="ioRemainingClassLabel">Class for remaining side</label><select id="ioRemainingClass" class="io-occlusion-input" data-occlusion="remainingClass"><option value="">Choose Class</option><option value="I">I</option><option value="II">II</option><option value="III">III</option><option value="Mesial step">Mesial step</option><option value="Flush terminal plane">Flush terminal plane</option><option value="Distal step">Distal step</option></select></div>
+              </div><div class="malocclusion-controls">
+          <label class="cohri-option" for="malocclusionEnabled">Malocclusion <input id="malocclusionEnabled" type="checkbox" aria-controls="malocclusionOptions"></label>
+          <div id="malocclusionOptions" hidden>
+            <select id="malocclusionType" class="io-occlusion-input" data-occlusion="malocclusionType" aria-label="Malocclusion type">
+              <option value="">Choose malocclusion</option>
+              <option value="Overbite (Deep bite)">Overbite (Deep bite)</option>
+              <option value="Overjet (Protrusion)">Overjet (Protrusion)</option>
+              <option value="Underbite (Prognathism)">Underbite (Prognathism)</option>
+              <option value="Open bite">Open bite</option>
+              <option value="Crossbite">Crossbite</option>
+              <option value="Crowding">Crowding</option>
+              <option value="Spacing">Spacing</option>
+            </select>
+            <input id="malocclusionDetails" class="cohri-details io-occlusion-input" data-occlusion="malocclusionDetails" type="text" aria-label="Malocclusion location" placeholder="Location" hidden>
+          </div>
+        </div></div>
+</fieldset>
+  <fieldset class="oral-screening-panel extra-oral-group" aria-labelledby="oralScreeningHeading">
+    <legend id="oralScreeningHeading">Oral cancer screening</legend>
+    <p class="oral-pathology-prompt">Any pathologic lesions found on</p>
+    <div class="oral-screening-row" role="group" aria-labelledby="oral-vermillion-label">
+      <span id="oral-vermillion-label" class="oral-screening-label">Vermillion borders</span>
+      <label><input type="radio" class="oral-screening-choice" name="oral-vermillion" value="no"> No</label>
+      <label><input type="radio" class="oral-screening-choice" name="oral-vermillion" value="yes" aria-controls="oral-vermillion-details"> Yes</label>
+      <input id="oral-vermillion-details" class="oral-screening-detail" type="text" aria-label="Vermillion borders pathology details" hidden>
+    </div>
+    <div class="oral-screening-row" role="group" aria-labelledby="oral-labial-label">
+      <span id="oral-labial-label" class="oral-screening-label">Labial mucosa</span>
+      <label><input type="radio" class="oral-screening-choice" name="oral-labial" value="no"> No</label>
+      <label><input type="radio" class="oral-screening-choice" name="oral-labial" value="yes" aria-controls="oral-labial-details"> Yes</label>
+      <input id="oral-labial-details" class="oral-screening-detail" type="text" aria-label="Labial mucosa pathology details" hidden>
+    </div>
+    <div class="oral-screening-row" role="group" aria-labelledby="oral-buccal-label">
+      <span id="oral-buccal-label" class="oral-screening-label">Buccal mucosa</span>
+      <label><input type="radio" class="oral-screening-choice" name="oral-buccal" value="no"> No</label>
+      <label><input type="radio" class="oral-screening-choice" name="oral-buccal" value="yes" aria-controls="oral-buccal-details"> Yes</label>
+      <input id="oral-buccal-details" class="oral-screening-detail" type="text" aria-label="Buccal mucosa pathology details" hidden>
+    </div>
+    <div class="oral-screening-row" role="group" aria-labelledby="oral-palate-label">
+      <span id="oral-palate-label" class="oral-screening-label">Hard and soft palate</span>
+      <label><input type="radio" class="oral-screening-choice" name="oral-palate" value="no"> No</label>
+      <label><input type="radio" class="oral-screening-choice" name="oral-palate" value="yes" aria-controls="oral-palate-details"> Yes</label>
+      <input id="oral-palate-details" class="oral-screening-detail" type="text" aria-label="Hard and soft palate pathology details" hidden>
+    </div>
+    <div class="oral-screening-row" role="group" aria-labelledby="oral-vestibular-label">
+      <span id="oral-vestibular-label" class="oral-screening-label">Mucosa of vestibular/cheeks</span>
+      <label><input type="radio" class="oral-screening-choice" name="oral-vestibular" value="no"> No</label>
+      <label><input type="radio" class="oral-screening-choice" name="oral-vestibular" value="yes" aria-controls="oral-vestibular-details"> Yes</label>
+      <input id="oral-vestibular-details" class="oral-screening-detail" type="text" aria-label="Mucosa of vestibular/cheeks pathology details" hidden>
+    </div>
+    <div class="oral-screening-row" role="group" aria-labelledby="oral-floor-label">
+      <span id="oral-floor-label" class="oral-screening-label">Floor of mouth</span>
+      <label><input type="radio" class="oral-screening-choice" name="oral-floor" value="no"> No</label>
+      <label><input type="radio" class="oral-screening-choice" name="oral-floor" value="yes" aria-controls="oral-floor-details"> Yes</label>
+      <input id="oral-floor-details" class="oral-screening-detail" type="text" aria-label="Floor of mouth pathology details" hidden>
+    </div>
+    <div class="oral-screening-row" role="group" aria-labelledby="oral-tongue-label">
+      <span id="oral-tongue-label" class="oral-screening-label">Dorsal and ventral borders of tongue</span>
+      <label><input type="radio" class="oral-screening-choice" name="oral-tongue" value="no"> No</label>
+      <label><input type="radio" class="oral-screening-choice" name="oral-tongue" value="yes" aria-controls="oral-tongue-details"> Yes</label>
+      <input id="oral-tongue-details" class="oral-screening-detail" type="text" aria-label="Dorsal and ventral borders of tongue pathology details" hidden>
+    </div>
+    <div class="oral-screening-row" role="group" aria-labelledby="oral-oropharynx-label">
+      <span id="oral-oropharynx-label" class="oral-screening-label">Oropharynx</span>
+      <label><input type="radio" class="oral-screening-choice" name="oral-oropharynx" value="no"> No</label>
+      <label><input type="radio" class="oral-screening-choice" name="oral-oropharynx" value="yes" aria-controls="oral-oropharynx-details"> Yes</label>
+      <input id="oral-oropharynx-details" class="oral-screening-detail" type="text" aria-label="Oropharynx pathology details" hidden>
+    </div>
+    <div class="oral-screening-row" role="group" aria-labelledby="oral-gingiva-label">
+      <span id="oral-gingiva-label" class="oral-screening-label">Gingiva</span>
+      <label><input type="radio" class="oral-screening-choice" name="oral-gingiva" value="no"> No</label>
+      <label><input type="radio" class="oral-screening-choice" name="oral-gingiva" value="yes" aria-controls="oral-gingiva-details"> Yes</label>
+      <input id="oral-gingiva-details" class="oral-screening-detail" type="text" aria-label="Gingiva pathology details" hidden>
+    </div>
+    <div class="oral-screening-row">
+      <label for="mallampatiScore" class="oral-screening-label">Tonsillar pillars (Mallampati score)</label>
+      <select id="mallampatiScore">
+        <option value="1" selected>Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option><option value="4">Class 4</option>
+      </select>
+    </div>
+    <label for="oralScreeningAdditional" class="extra-oral-notes-label">Additional findings</label>
+    <textarea id="oralScreeningAdditional" class="cohri-details exam-notes" rows="2" aria-label="Oral cancer screening additional findings"></textarea>
+  </fieldset>
+    </div>
+    <section id="recallEvaluation" aria-labelledby="clinicalFindingsHeading" hidden>
+    <fieldset class="clinical-findings-border extra-oral-group">
+      <legend id="clinicalFindingsHeading" class="clinical-findings-heading"><span aria-hidden="true">🔎</span> Clinical and radiographic findings</legend>
+    <div class="dentition-canvas">
+      <div class="dentition-controls" aria-label="Dentition">
+        <button type="button" class="dentition-button active" data-dentition="permanent" aria-pressed="true">Full permanent</button>
+        <button type="button" class="dentition-button" data-dentition="primary" aria-pressed="false">Full primary</button>
+        <button type="button" class="dentition-button" data-dentition="mixed" aria-pressed="false">Mixed</button>
+      </div>
+      <div class="arch" id="maxillary"></div>
+      <div class="quadrant-horizontal-line"></div>
+      <div class="arch" id="mandibular"></div>
+      <div class="main-odontogram-controls">
+        <button id="missingMain" class="finding whole-finding btn-missing" data-name="missing" aria-keyshortcuts="m">(M) Missing</button>
+        <button id="changeAge" class="main-control-button">Change Age</button>
+      </div>
+    </div>
+    <section class="clinical-panel odontogram-findings">
+      <div class="finding-section">
+        <div class="finding-row nsf-row">
+          <button class="finding whole-finding btn-nsf" data-name="NSF" aria-keyshortcuts="n" title="Select a tooth and press N">(N) No significant finding</button>
+        </div>
+        <div class="finding-row"><span class="finding-label">Caries:</span>
+          <button class="finding surface-finding btn-caries" data-name="decay" aria-keyshortcuts="d">(D) Decay</button>
+          <button class="finding surface-finding btn-decalcified" data-name="decalcified">Decalcified</button>
+          <button class="finding surface-finding btn-stain" data-name="stain">Stain</button>
+          <button class="finding surface-finding btn-incipient" data-name="incipient caries" aria-keyshortcuts="i">(I) Incipient</button>
+          <button class="finding surface-finding btn-recurrent" data-name="recurrent caries">Recurrent</button>
+          <button class="finding surface-finding btn-gross" data-name="gross caries">Gross</button>
+        </div>
+        <div class="finding-row"><span class="finding-label">Material:</span>
+          <button class="finding surface-finding btn-composite" data-name="composite" aria-keyshortcuts="c">(C) Composite</button>
+          <button class="finding surface-finding btn-amalgam" data-name="amalgam" aria-keyshortcuts="a">(A) Amalgam</button>
+          <button class="finding surface-finding btn-sealant" data-name="sealant">Sealant</button>
+          <button class="finding surface-finding btn-irm" data-name="IRM">IRM</button>
+          <button class="finding whole-finding btn-ssc" data-name="SSC">SSC</button>
+          <button class="finding whole-finding btn-zirconia" data-name="Zirconia crown" aria-keyshortcuts="z">(Z) Zirconia</button>
+          <button class="finding whole-finding btn-pfm" data-name="PFM crown" aria-keyshortcuts="p">(P) PFM</button>
+          <button class="finding whole-finding btn-metal" data-name="Metal crown">Metal</button>
+          <button class="finding whole-finding btn-bridge" data-name="Bridge" aria-keyshortcuts="b">(B) Bridge</button>
+          <button class="finding whole-finding btn-implant" data-name="implant">Implant</button>
+        </div>
+        <div class="finding-row"><span class="finding-label">Endo:</span>
+          <button class="finding whole-finding btn-rct" data-name="RCT" aria-keyshortcuts="r">(R) RCT</button>
+          <button class="finding whole-finding btn-post-core" data-name="post & core">Post & Core</button>
+          <button class="finding whole-finding btn-root-tip" data-name="root tip" aria-keyshortcuts="t">(T) Root Tip</button>
+          <button class="finding whole-finding btn-parl" data-name="PARL">PARL</button>
+          <button class="finding whole-finding btn-paro" data-name="PARO">PARO</button>
+          <button class="finding whole-finding btn-ankylosis" data-name="ankylosis">Ankylosis</button>
+        </div>
+        <div class="finding-row"><span class="finding-label">Non-carious:</span>
+          <button class="finding whole-finding btn-wear" data-name="wear" aria-keyshortcuts="w">(W) Wear</button>
+          <button class="finding surface-finding btn-chipped" data-name="chipped">Chipped</button>
+          <button class="finding surface-finding btn-abfraction" data-name="abfraction">Abfraction</button>
+          <button class="finding surface-finding btn-erosion" data-name="erosion">Erosion</button>
+          <button class="finding surface-finding btn-crack" data-name="crack line">Crack Line</button>
+          <button class="finding surface-finding btn-broken" data-name="broken">Broken</button>
+        </div>
+        <div class="finding-row"><span class="finding-label">Position:</span>
+          <button class="finding whole-finding position-button" data-name="mobility">Mobility</button>
+          <button class="finding whole-finding position-button" data-name="tilted">Tilted</button>
+          <button class="finding whole-finding position-button" data-name="rotated">Rotated</button>
+          <button class="finding whole-finding position-button" data-name="super-eruption">Super-eruption</button>
+          <button class="finding whole-finding position-button" data-name="erupting">Erupting</button>
+          <button class="finding whole-finding position-button" data-name="impacted">Impacted</button>
+          <button class="finding whole-finding position-button" data-name="unerupted">Unerupted</button>
+        </div>
+      </div>
+    </section>
+    </fieldset>
+    <div class="periodontal-charting-row">
+      <label for="updatedPeriodontalCharting"><span aria-hidden="true">🖊️</span> Updated periodontal charting <input id="updatedPeriodontalCharting" type="checkbox"></label>
+    </div>
+    </section>
+  </div>
+  <div class="clinical-panels treatment-panels">
+    <section class="clinical-panel">
+      <h2>Suggested treatment</h2>
+      <div class="treatment-section">
+        <div class="finding-row"><span class="finding-label">Conservative:</span>
+          <button type="button" class="treatment watch-treatment btn-watch" data-treatment="Watch">Watch</button>
+          <button type="button" class="treatment surface-treatment btn-sdf" data-treatment="SDF">SDF</button>
+        </div>
+        <div class="finding-row treatment-single-line"><span class="finding-label">Filling:</span>
+          <button type="button" class="treatment surface-treatment btn-composite" data-treatment="Composite" aria-keyshortcuts="f">(F) Composite</button>
+          <button type="button" class="treatment surface-treatment btn-amalgam" data-treatment="Amalgam">Amalgam</button>
+          <button type="button" class="treatment surface-treatment btn-rmgi" data-treatment="RMGI">RMGI</button>
+          <button type="button" class="treatment surface-treatment btn-irm" data-treatment="IRM">IRM</button>
+        </div>
+        <div class="finding-row"><span class="finding-label">Endo:</span>
+          <button type="button" class="treatment whole-treatment btn-rct" data-treatment="Pulpotomy">Pulpotomy</button>
+          <button type="button" class="treatment whole-treatment btn-rct" data-treatment="RCT">RCT</button>
+          <button type="button" class="treatment whole-treatment btn-post-core" data-treatment="post & core">post & core</button>
+        </div>
+        <div class="finding-row"><span class="finding-label">Crown/FPD:</span>
+          <button type="button" class="treatment whole-treatment btn-cbu" data-treatment="CBU">CBU</button>
+          <button type="button" class="treatment whole-treatment btn-ssc" data-treatment="SSC">SSC</button>
+          <button type="button" class="treatment whole-treatment btn-zirconia" data-treatment="Zirconia">Zirconia</button>
+          <button type="button" class="treatment whole-treatment btn-pfm" data-treatment="PFM">PFM</button>
+          <button type="button" class="treatment whole-treatment btn-metal" data-treatment="Metal">Metal</button>
+          <button type="button" class="treatment whole-treatment btn-bridge" data-treatment="Bridge">Bridge</button>
+        </div>
+        <div class="finding-row treatment-single-line"><span class="finding-label">OS:</span>
+          <button type="button" class="treatment whole-treatment btn-extraction" data-treatment="Extraction" aria-keyshortcuts="e">(E) Extraction</button>
+          <button type="button" class="treatment whole-treatment btn-lengthening" data-treatment="Crown lengthening">Crown lengthening</button>
+          <button type="button" class="treatment whole-treatment btn-implant" data-treatment="Implant">Implant</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <h2>Note</h2>
+    <div class="cohri-row note-fields-row recall-note-fields">
+      <label for="noteNV">NV: <input id="noteNV" class="provided-input" type="text" aria-label="Next visit"></label>
+      <label for="notePreceptor">Preceptor: <select id="notePreceptor" class="provided-input"></select><input id="notePreceptorOther" class="provided-input" type="text" aria-label="Other preceptor name" placeholder="Preceptor name" hidden></label>
+      <div class="different-preceptors" role="group" aria-label="Different preceptors"><span>If different preceptor</span><div class="different-preceptor-option"><label class="cohri-option"><input id="noteCodesDifferent" class="provided-input" type="checkbox" aria-controls="noteCodesFields">for completing codes</label><span id="noteCodesFields" class="different-preceptor-fields" hidden><select id="noteCodesPreceptor" class="provided-input" aria-label="Preceptor for completing codes"></select><input id="noteCodesOther" class="provided-input" type="text" aria-label="Other preceptor for completing codes" placeholder="Preceptor name" hidden></span></div><div class="different-preceptor-option"><label class="cohri-option"><input id="noteSwipeDifferent" class="provided-input" type="checkbox" aria-controls="noteSwipeFields">for swiping note</label><span id="noteSwipeFields" class="different-preceptor-fields" hidden><select id="noteSwipePreceptor" class="provided-input" aria-label="Preceptor for swiping note"></select><input id="noteSwipeOther" class="provided-input" type="text" aria-label="Other preceptor for swiping note" placeholder="Preceptor name" hidden></span></div></div>
+    </div>
+  <div id="output"></div>
+  <div class="chart-controls">
+    <button id="copyChart">Copy Note</button>
+    <button id="undo">Undo Last</button>
+  </div>
+  <div id="copyMessage"></div>
+  <div class="clear-all-area">
+    <button id="clearAll" type="button">Clear All</button>
+  </div>
+  <dialog id="clearAllDialog" aria-labelledby="clearAllTitle" aria-describedby="clearAllDescription">
+    <h3 id="clearAllTitle">Clear all data?</h3>
+    <p id="clearAllDescription">Delete all findings, treatments, and chart notes, and reset tooth settings? This cannot be undone.</p>
+    <div class="clear-all-actions">
+      <button id="cancelClearAll" type="button" autofocus>No, keep data</button>
+      <button id="confirmClearAll" type="button">Yes, delete all</button>
+    </div>
+  </dialog>
+  <template id="recallPreceptorOptions"><option value="">Choose a preceptor</option><option value="Dr. Doyle">Dr. Doyle</option><option value="Dr. Hoch">Dr. Hoch</option><option value="Dr. Kohler">Dr. Kohler</option><option value="Dr. Palo">Dr. Palo</option><option value="Dr. McAllister">Dr. McAllister</option><option value="Dr. Roberts">Dr. Roberts</option><option value="Dr. Calderbank">Dr. Calderbank</option><option value="Dr. Goldsmith">Dr. Goldsmith</option><option value="Dr. Pollock">Dr. Pollock</option><option value="Dr. Poe">Dr. Poe</option><option value="Others">Others</option></template>
+  <script src="script.js?v=5146d29e2a"></script>
+</body>
+</html>

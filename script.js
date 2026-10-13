@@ -311,9 +311,14 @@ const query = selector => document.querySelector(selector);
 const all = selector => document.querySelectorAll(selector);
 const byId = id => document.getElementById(id);
 
+function formatFindingText(surface, finding) {
+  const name = finding.toLowerCase();
+  return surface ? surface + " " + name : name.charAt(0).toUpperCase() + name.slice(1);
+}
+
 function recordText(record) {
   const surface = record.whole ? "" : formatSurfaceText(record.surfaces);
-  return surface ? surface + " " + record.finding : record.finding;
+  return formatFindingText(surface, record.finding);
 }
 
 function setDentitionButtons(mode) {
@@ -690,7 +695,8 @@ function renderFindings() {
     "recurrent caries": "recurrent-caries", "gross caries": "gross-caries", "composite": "composite",
     "amalgam": "amalgam", "sealant": "sealant", "IRM": "irm",
     "wear": "wear", "abfraction": "abfraction", "erosion": "erosion",
-    "crack line": "crack-line", "chipped": "chipped", "broken": "broken"
+    "crack line": "crack-line", "chipped": "chipped", "broken": "broken",
+    "overhang": "overhang", "open margin": "open-margin", "rest seat": "rest-seat"
   };
   const wholeClasses = {
     "SSC": "ssc", "Zirconia crown": "zirconia-crown", "PFM crown": "pfm-crown",
@@ -775,14 +781,13 @@ function renderFindings() {
   renderBridges();
 }
 
- function renderToothFindingsText() {
+function renderToothFindingsText() {
   all(".tooth-findings-text").forEach(container => container.replaceChildren());
   findings.forEach(record => {
     if (!record.treatment && record.finding === "missing") return;
-    const surfaces = record.whole ? "" : [...record.surfaces]
-      .sort((a, b) => "MOIDBFLC".indexOf(a) - "MOIDBFLC".indexOf(b)).join("");
-    const name = record.finding.charAt(0).toUpperCase() + record.finding.slice(1);
-    const description = [surfaces, name].filter(Boolean).join(" ");
+    const surfaces = record.whole ? "" : formatSurfaceText(record.surfaces, "cer");
+    const name = record.finding === "recurrent caries" ? "recur. caries" : record.finding;
+    const description = formatFindingText(surfaces, name);
     const text = record.treatment ? "[" + description + "]" : description;
     (record.treatment ? [record.tooth] : record.bridgeTeeth || [record.tooth]).forEach(number => {
       const container = query(`.tooth-findings-text[data-tooth="${number}"]`);
@@ -905,11 +910,11 @@ function bridgeLabel(label) {
   return typeof label === "string" && label.startsWith("#") ? label.slice(1) : label;
 }
 
-function formatSurfaceText(surfaces) {
+function formatSurfaceText(surfaces, cervicalLabel = "cervical") {
   const order = ["M", "O", "I", "D", "B", "F", "L", "C"];
   const sorted = [...surfaces].sort((a, b) => order.indexOf(a) - order.indexOf(b));
   const text = sorted.filter(surface => surface !== "C").join("");
-  return sorted.includes("C") ? (text ? text + " cervical" : "cervical") : text;
+  return sorted.includes("C") ? (text ? text + (cervicalLabel === "cer" ? "-" : " ") + cervicalLabel : cervicalLabel) : text;
 }
 
 function highlightMobility(element) {
@@ -945,10 +950,10 @@ function formatChartRecord(record) {
 }
 
 function formatTreatmentRecord(record) {
-  if (["Bridge", "bridge"].includes(record.finding)) return isToothMissing(record.tooth) ? "FPD pontic" : "FPD abutment";
+  if (["Bridge", "bridge"].includes(record.finding)) return isToothMissing(record.tooth) ? "Fpd pontic" : "Fpd abutment";
   if (record.proximalDecayTreatment && !record.whole) {
     const surface = formatSurfaceText(record.surfaces).replace(/^OD/, "DO");
-    return surface ? surface + " " + record.finding : record.finding;
+    return formatFindingText(surface, record.finding);
   }
   return recordText(record);
 }
@@ -1027,7 +1032,6 @@ function createTagChartLine(group) {
   entry.className = "chart-entry chart-tag-entry";
   const line = document.createElement("div");
   line.className = "chart-text chart-tag-list";
-  line.contentEditable = "false";
   const label = document.createElement("button");
   label.type = "button";
   label.contentEditable = "false";
@@ -1082,24 +1086,43 @@ function createTagChartLine(group) {
     createGap(editKey + "-gap-before-" + record.chartTagId,
       index === 0 || record === treatmentRecords[0] ? " " : "; ");
     const tag = document.createElement("span");
-    tag.contentEditable = "false";
     tag.className = "chart-tag" + (record.treatment ? " chart-treatment-tag" : "");
-    const text = document.createElement(record.treatment ? "span" : "button");
+    const text = document.createElement("span");
     text.className = "chart-tag-text" + (record.treatment ? "" : " chart-finding-select");
-    text.contentEditable = "false";
+    text.contentEditable = record.treatment ? "true" : "false";
+    if (record.treatment) {
+      text.tabIndex = 0;
+      text.addEventListener("pointerdown", () => text.focus({ preventScroll: true }));
+    }
+    text.spellcheck = true;
+    text.setAttribute("role", "textbox");
+    text.setAttribute("aria-label", "Edit " + recordText(record) + " on " + group.label);
     if (!record.treatment) {
-      text.type = "button";
       text.dataset.tooth = record.tooth;
       text.dataset.whole = String(record.whole);
       text.dataset.surfaces = JSON.stringify(record.surfaces);
+      text.setAttribute("role", "button");
       text.setAttribute("aria-label", "Select " + recordText(record) + " on " + group.label);
-      text.addEventListener("click", () => selectChartTarget(record.tooth, record.whole, record.surfaces, record));
+      text.tabIndex = 0;
+      text.title = "Select this finding";
+      const selectFinding = () => selectChartTarget(record.tooth, record.whole, record.surfaces, record);
+      text.addEventListener("click", selectFinding);
+      text.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") { event.preventDefault(); selectFinding(); }
+      });
     }
     const defaultText = !record.treatment && ["Bridge", "bridge"].includes(record.finding)
-      ? "bridge (" + (record.bridgeTeeth || [record.tooth]).map(getToothLabel).join("–") + ")"
+      ? "Bridge (" + (record.bridgeTeeth || [record.tooth]).map(getToothLabel).join("–") + ")"
       : record.treatment ? formatTreatmentRecord(record) : recordText(record);
     text.textContent = chartEdits[record.chartTagId] ?? defaultText;
     highlightMobility(text);
+    const saveRecordText = () => {
+      chartEdits[record.chartTagId] = cleanText(text.textContent);
+      delete chartEdits[editKey];
+      syncText();
+    };
+    text.addEventListener("input", saveRecordText);
+    text.addEventListener("blur", () => { saveRecordText(); saveOdontogram(); });
     parts.push({ record, element: text });
     if (record.treatment) {
       const treatment = document.createElement("strong");
@@ -1143,7 +1166,17 @@ function createTagChartLine(group) {
   entry.append(line);
 
   // The trailing space is part of the line, without a separate notes field.
-  createGap(editKey + "-notes", chartEdits[editKey] ?? " ");
+  const trailingText = createGap(editKey + "-notes", chartEdits[editKey] ?? " ");
+  line.addEventListener("click", event => {
+    if (event.target !== line) return;
+    trailingText.focus();
+    const range = document.createRange();
+    range.selectNodeContents(trailingText);
+    range.collapse(false);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+  });
   syncText();
   return entry;
 }
@@ -1443,7 +1476,7 @@ byId("copyChart").addEventListener("click", async () => {
 const findingShortcuts = {
   n: "NSF", d: "decay", c: "composite", a: "amalgam",
   r: "RCT", z: "Zirconia crown", b: "Bridge",
-  w: "wear", m: "missingMain", t: "root tip",
+  m: "missingMain", t: "root tip",
   p: "PFM crown", i: "incipient caries"
 };
 document.addEventListener("keydown", event => {
@@ -1452,7 +1485,7 @@ document.addEventListener("keydown", event => {
   const active = document.activeElement;
   if (active && active.closest(editingSelector)) return;
   if ( event.target instanceof Element && event.target.closest(editingSelector) ) return;
-  const treatment = {f: "Composite", e: "Extraction"}[event.key.toLowerCase()];
+  const treatment = {f: "Composite", e: "Extraction", w: "Watch"}[event.key.toLowerCase()];
   const name = treatment || findingShortcuts[event.key.toLowerCase()];
   if (!name) return;
   const button = treatment ? query(`.treatment[data-treatment="${treatment}"]`) : name === "missingMain" ? byId("missingMain") : Array.from(all(".finding")) .find((button) => button.dataset.name === name);

@@ -124,9 +124,9 @@ hr { height: 1px; border: 0; margin: 25px 0 10px; background: linear-gradient(90
 .cervical-surface { fill: rgba(255,255,255,.95); stroke: #496480; stroke-width: 1.7; }
 .surface.selected { fill: #ffe38a !important; stroke: #d99b16; }
 .tooth-diagram text { fill: #30465e; font-weight: 600; }
-.tooth-number { border: 1px solid transparent; border-radius: 9px; font-size: 13px; color: var(--ink); transition: background .15s,box-shadow .15s; }
-.tooth-number:hover { background: rgba(255,255,255,.85); border-color: rgba(118,145,175,.25); box-shadow: 0 3px 8px rgba(36,62,96,.08); }
-.tooth-number.selected { background: #ffe38a; border-color: #e3bd52; color: #604816; box-shadow: 0 3px 9px rgba(215,168,41,.18); }
+.tooth-number { border: 1px solid transparent; border-radius: 9px; font-size: 13px; color: var(--ink); transition: none; }
+.tooth-number:hover { background:#fff; border-color:#c4d1df; box-shadow:none; }
+.tooth-number.selected { background:#ffe38a; border-color:#e3bd52; color:#604816; box-shadow:none; }
 .position-display { color: var(--muted); font-weight: normal; line-height: 1.35; }
 .dentition-button, #changeAge, #missingMain { border: 1px solid rgba(135,157,185,.30); border-radius: 999px; background: rgba(255,255,255,.72); color: var(--ink); font-weight: normal; box-shadow: inset 0 1px 0 rgba(255,255,255,.95),0 3px 9px rgba(44,75,114,.06); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: background .15s,box-shadow .15s,transform .15s; }
 .chart-controls button { padding: 7px 15px; border: 1px solid rgba(135,157,185,.30); border-radius: 999px; background: rgba(255,255,255,.72); color: var(--ink); font-size: 13px; font-weight: normal; box-shadow: inset 0 1px 0 rgba(255,255,255,.95),0 3px 9px rgba(44,75,114,.06); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: background .15s,box-shadow .15s,transform .15s; }
@@ -527,7 +527,7 @@ body > .clear-all-area { width: 100%; box-sizing: border-box; margin-top: 40px; 
 #recallEvaluation .tooth.midline { margin-right: 6px; }
 #recallEvaluation .dentition-canvas { width: max-content; max-width: 100%; }
 #recallEvaluation .tooth-diagram { width: 68px; margin-left: auto; margin-right: auto; }
-#recallEvaluation .tooth-number { display: flex; width: max-content; margin-left: auto; margin-right: auto; justify-content: center; }
+#recallEvaluation .tooth-number { position:relative; z-index:2; display:flex; width:51px; min-width:51px; margin-left:auto; margin-right:auto; justify-content:center; }
 .cohri-panel, .cleaning-panel, .extra-oral-exam, #recallEvaluationArea { width: 100%; max-width: 1450px; box-sizing: border-box; }
 body .chart-treatment-layout .treatment-section .finding-row.treatment-single-line { flex-wrap: nowrap; overflow-x: auto; }
 .treatment-single-line .treatment { flex-shrink: 0; white-space: nowrap; }
@@ -542,3 +542,12 @@ body .chart-treatment-layout.cleaning-only-layout { grid-template-columns: minma
 @media (max-width: 900px) {
   body .chart-treatment-layout { grid-template-columns: 1fr; }
 }
+
+.btn-overhang { background:#42a5f5; color:white; }
+.btn-open-margin { background:#42a5f5; color:white; }
+.btn-rest-seat { background:#fff176; color:#222; }
+.surface.overhang { fill:#ffb74d; stroke:#ef6c00; stroke-width:2; }
+.surface.open-margin { fill:#ff8a65; stroke:#d84315; stroke-width:2; }
+.surface.rest-seat { fill:#fff176; stroke:#b59b00; stroke-width:2; }
+.chart-tag-text[contenteditable="true"] { display:inline-block; cursor:text; min-width:1px; min-height:1em; white-space:pre-wrap; user-select:text; -webkit-user-select:text; pointer-events:auto; }
+.chart-tag-text[contenteditable="true"]:focus { outline:1px solid rgba(59,130,246,.5); border-radius:3px; }

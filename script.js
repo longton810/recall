@@ -311,9 +311,14 @@ const query = selector => document.querySelector(selector);
 const all = selector => document.querySelectorAll(selector);
 const byId = id => document.getElementById(id);
 
+function capitalizeClinicalAbbreviations(text) {
+  return text.replace(/\b(?:NSF|PARL|PARO|IRM|SSC|PFM|SDF|RMGI|RCT|CBU)\b/gi, abbreviation => abbreviation.toUpperCase());
+}
+
 function formatFindingText(surface, finding) {
   const name = finding.toLowerCase();
-  return surface ? surface + " " + name : name.charAt(0).toUpperCase() + name.slice(1);
+  const text = surface ? surface + " " + name : name.charAt(0).toUpperCase() + name.slice(1);
+  return capitalizeClinicalAbbreviations(text);
 }
 
 function recordText(record) {
@@ -1114,7 +1119,7 @@ function createTagChartLine(group) {
     const defaultText = !record.treatment && ["Bridge", "bridge"].includes(record.finding)
       ? "Bridge (" + (record.bridgeTeeth || [record.tooth]).map(getToothLabel).join("–") + ")"
       : record.treatment ? formatTreatmentRecord(record) : recordText(record);
-    text.textContent = chartEdits[record.chartTagId] ?? defaultText;
+    text.textContent = capitalizeClinicalAbbreviations(chartEdits[record.chartTagId] ?? defaultText);
     highlightMobility(text);
     const saveRecordText = () => {
       chartEdits[record.chartTagId] = cleanText(text.textContent);

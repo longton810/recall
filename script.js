@@ -3,8 +3,9 @@
   document.getElementById(id).append(document.getElementById('recallPreceptorOptions').content.cloneNode(true));
 });
 
-const recallNoteFieldIds = ['noteNV','notePreceptor','notePreceptorOther','noteCodesDifferent','noteCodesPreceptor','noteCodesOther','noteSwipeDifferent','noteSwipePreceptor','noteSwipeOther'];
+const recallNoteFieldIds = ['noteNV','noteAssistantEnabled','noteAssistant','notePreceptor','notePreceptorOther','noteCodesDifferent','noteCodesPreceptor','noteCodesOther','noteSwipeDifferent','noteSwipePreceptor','noteSwipeOther'];
 function updateRecallPreceptors() {
+  byId('noteAssistant').hidden = !byId('noteAssistantEnabled').checked;
   byId('notePreceptorOther').hidden = byId('notePreceptor').value !== 'Others';
   for (const role of ['Codes','Swipe']) {
     byId('note'+role+'Fields').hidden = !byId('note'+role+'Different').checked;
@@ -15,6 +16,7 @@ function readRecallNoteFields() {
   return Object.fromEntries(recallNoteFieldIds.map(id => [id, byId(id).type === 'checkbox' ? byId(id).checked : byId(id).value]));
 }
 function restoreRecallNoteFields(data = {}) {
+  data = { ...data, noteAssistantEnabled: typeof data.noteAssistantEnabled === 'boolean' ? data.noteAssistantEnabled : Boolean(data.noteAssistant?.trim()) };
   recallNoteFieldIds.forEach(id => {
     const input = byId(id);
     if (input.type === 'checkbox') input.checked = data[id] === true;
@@ -25,7 +27,7 @@ function restoreRecallNoteFields(data = {}) {
 function renderRecallPreceptorNote(output) {
   const data = readRecallNoteFields();
   const name = role => data['note'+role+'Preceptor'] === 'Others' ? (data[role ? 'note'+role+'Other' : 'notePreceptorOther'] || '').trim() : data['note'+role+'Preceptor'];
-  for (const [label,value] of [['NV',data.noteNV],['Student Dr','Long Ton'],['Preceptor',name('')]]) {
+  for (const [label,value] of [['NV',data.noteNV],['Student Dr','Long Ton'],...(data.noteAssistantEnabled ? [['Assistant',data.noteAssistant]] : []),['Preceptor',name('')]]) {
     const entry = document.createElement('div'); entry.className = 'chart-entry recall-preceptor-note';
     if (label === 'NV') entry.classList.add('note-nv-start');
     const text = document.createElement('span'); text.className = 'chart-text preceptor-narrative';

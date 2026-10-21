@@ -3,7 +3,7 @@
   document.getElementById(id).append(document.getElementById('recallPreceptorOptions').content.cloneNode(true));
 });
 
-const recallNoteFieldIds = ['noteNV','noteAssistantEnabled','noteAssistant','notePreceptor','notePreceptorOther','noteCodesDifferent','noteCodesPreceptor','noteCodesOther','noteSwipeDifferent','noteSwipePreceptor','noteSwipeOther'];
+const recallNoteFieldIds = ['noteStudent','noteNV','noteAssistantEnabled','noteAssistant','notePreceptor','notePreceptorOther','noteCodesDifferent','noteCodesPreceptor','noteCodesOther','noteSwipeDifferent','noteSwipePreceptor','noteSwipeOther'];
 function updateRecallPreceptors() {
   byId('noteAssistant').hidden = !byId('noteAssistantEnabled').checked;
   byId('notePreceptorOther').hidden = byId('notePreceptor').value !== 'Others';
@@ -27,7 +27,7 @@ function restoreRecallNoteFields(data = {}) {
 function renderRecallPreceptorNote(output) {
   const data = readRecallNoteFields();
   const name = role => data['note'+role+'Preceptor'] === 'Others' ? (data[role ? 'note'+role+'Other' : 'notePreceptorOther'] || '').trim() : data['note'+role+'Preceptor'];
-  for (const [label,value] of [['NV',data.noteNV],['Student Dr','Long Ton'],...(data.noteAssistantEnabled ? [['Assistant',data.noteAssistant]] : []),['Preceptor',name('')]]) {
+  for (const [label,value] of [['NV',data.noteNV],['Student Dr',data.noteStudent],...(data.noteAssistantEnabled ? [['Assistant',data.noteAssistant]] : []),['Preceptor',name('')]]) {
     const entry = document.createElement('div'); entry.className = 'chart-entry recall-preceptor-note';
     if (label === 'NV') entry.classList.add('note-nv-start');
     const text = document.createElement('span'); text.className = 'chart-text preceptor-narrative';

@@ -103,7 +103,11 @@ function readRecallDentitionOcclusion() {
 }
 function restoreRecallDentitionOcclusion(data = {}) {
   byId('malocclusionEnabled').checked = data.occlusion?.malocclusionEnabled === true;
-  all('.rx-dentition-choice').forEach(input => { input.checked = input.value === data.dentition?.[input.dataset.jaw]; });
+  all('.rx-dentition-choice').forEach(input => {
+    const saved = data.dentition?.[input.dataset.jaw];
+    const value = ['Partially dentate','Partially edentulous'].includes(saved) ? 'Partially dentate/edentulous' : saved;
+    input.checked = input.value === (value || 'Partially dentate/edentulous');
+  });
   all('.io-occlusion-input').forEach(input => { input.value = typeof data.occlusion?.[input.dataset.occlusion] === 'string' ? data.occlusion[input.dataset.occlusion] : ''; });
   for (const [name,key] of [['io-class-laterality','laterality'],['io-class-side','side']]) all(`input[name="${name}"]`).forEach(input => { input.checked = input.value === data.occlusion?.[key]; });
   updateOcclusalClassFields();
@@ -703,7 +707,7 @@ function renderFindings() {
     "amalgam": "amalgam", "sealant": "sealant", "IRM": "irm",
     "wear": "wear", "abfraction": "abfraction", "erosion": "erosion",
     "crack line": "crack-line", "chipped": "chipped", "broken": "broken",
-    "overhang": "overhang", "open margin": "open-margin", "rest seat": "rest-seat"
+    "overhang": "overhang", "open margin": "open-margin", "rest seat": "rest-seat", "pit": "pit", "deep groove": "deep-groove", "short margin": "short-margin"
   };
   const wholeClasses = {
     "SSC": "ssc", "Zirconia crown": "zirconia-crown", "PFM crown": "pfm-crown",
@@ -713,7 +717,7 @@ function renderFindings() {
   };
   const crownFindings = [ "SSC", "Zirconia crown", "PFM crown", "Metal crown", "implant" ];
   const crownTreatments = [ "CBU", "SSC", "Zirconia", "PFM", "Metal", "Bridge", "bridge", "Implant", "implant" ];
-  const fillingTreatments = [ "Composite", "Amalgam", "RMGI", "IRM" ];
+  const fillingTreatments = [ "Composite", "Amalgam", "RMGI", "IRM", "Sealant" ];
   all(".cervical-label").forEach( label => { label.textContent = "C"; });
   all(".root-markers").forEach( marker => { marker.innerHTML = ""; });
   all(".surface").forEach( surface => {
@@ -1663,7 +1667,7 @@ all(".finding-section, .treatment-section")
   if (section.classList.contains("finding-section")) {
     const findingRows = [...section.children].filter(row => row.classList.contains("finding-row"));
     const rowsByName = Object.fromEntries(findingRows.map(row => [row.classList.contains("nsf-row") ? "NSF" : row.querySelector(".finding-label")?.textContent.trim().replace(/:$/, ""), row]));
-    [["NSF", "Caries", "Endo"], ["Material"], ["Non-carious", "Position"]].forEach(names => {
+    [["NSF", "Caries", "Endo"], ["Existing material"], ["Non-carious", "Position"]].forEach(names => {
       const line = document.createElement("div");
       line.className = "category-pair recall-findings-line";
       names.forEach(name => { if (rowsByName[name]) line.append(rowsByName[name]); });

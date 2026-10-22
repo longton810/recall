@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Recall</title>
-  <link rel="stylesheet" href="style.css?v=b837e220a4">
+  <link rel="stylesheet" href="style.css?v=material-groups-20261021">
 </head>
 <body>
   <div class="recall-type-row">
@@ -108,7 +108,7 @@
     </div>
 
     <div class="recall-dentition-occlusion">
-<fieldset class="extra-oral-group recall-dentition-group"><legend>Dentition</legend><div class="rx-dentition-lines"><div class="rx-dentition-row" role="group" aria-label="Maxillae dentition"><span>Maxillae</span><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-maxillae" data-jaw="maxillae" value="Full permanent">Full permanent</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-maxillae" data-jaw="maxillae" value="Partially dentate">Partially dentate</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-maxillae" data-jaw="maxillae" value="Partially edentulous">Partially edentulous</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-maxillae" data-jaw="maxillae" value="Edentulous">Edentulous</label></div><div class="rx-dentition-row" role="group" aria-label="Mandible dentition"><span>Mandible</span><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-mandible" data-jaw="mandible" value="Full permanent">Full permanent</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-mandible" data-jaw="mandible" value="Partially dentate">Partially dentate</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-mandible" data-jaw="mandible" value="Partially edentulous">Partially edentulous</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-mandible" data-jaw="mandible" value="Edentulous">Edentulous</label></div></div></fieldset>
+<fieldset class="extra-oral-group recall-dentition-group"><legend>Dentition</legend><div class="rx-dentition-lines"><div class="rx-dentition-row" role="group" aria-label="Maxillae dentition"><span>Maxillae</span><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-maxillae" data-jaw="maxillae" value="Full primary">Full primary</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-maxillae" data-jaw="maxillae" value="Mixed dentition">Mixed dentition</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-maxillae" data-jaw="maxillae" value="Full permanent">Full permanent</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-maxillae" data-jaw="maxillae" value="Partially dentate/edentulous" checked>Partially dentate/edentulous</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-maxillae" data-jaw="maxillae" value="Edentulous">Edentulous</label></div><div class="rx-dentition-row" role="group" aria-label="Mandible dentition"><span>Mandible</span><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-mandible" data-jaw="mandible" value="Full primary">Full primary</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-mandible" data-jaw="mandible" value="Mixed dentition">Mixed dentition</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-mandible" data-jaw="mandible" value="Full permanent">Full permanent</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-mandible" data-jaw="mandible" value="Partially dentate/edentulous" checked>Partially dentate/edentulous</label><label class="cohri-option"><input class="rx-dentition-choice" type="radio" name="rx-dentition-mandible" data-jaw="mandible" value="Edentulous">Edentulous</label></div></div></fieldset>
       <fieldset class="extra-oral-group io-group occlusal-classification"><legend>Occlusal classification</legend>
         <div class="occlusion-layout"><div class="occlusion-main">
         <div class="cohri-row"><label for="ioOcclusalClass">Class <select id="ioOcclusalClass" class="io-occlusion-input" data-occlusion="class"><option value="">Choose Class</option><option value="I">I</option><option value="II">II</option><option value="III">III</option><option value="Mesial step">Mesial step</option><option value="Flush terminal plane">Flush terminal plane</option><option value="Distal step">Distal step</option></select> <select id="ioClassDivision" class="io-occlusion-input" data-occlusion="division" aria-label="Class II division" hidden><option value="">Choose division</option><option value="Division 1">Division 1</option><option value="Division 2">Division 2</option></select></label>
@@ -234,18 +234,19 @@
           <button class="finding surface-finding btn-recurrent" data-name="recurrent caries">Recurrent</button>
           <button class="finding surface-finding btn-gross" data-name="gross caries">Gross</button>
         </div>
-        <div class="finding-row"><span class="finding-label">Material:</span>
-          <button class="finding surface-finding btn-composite" data-name="composite" aria-keyshortcuts="c">(C) Composite</button>
-          <button class="finding surface-finding btn-amalgam" data-name="amalgam" aria-keyshortcuts="a">(A) Amalgam</button>
-          <button class="finding surface-finding btn-sealant" data-name="sealant">Sealant</button>
-          <button class="finding surface-finding btn-irm" data-name="IRM">IRM</button>
-          <button class="finding whole-finding btn-ssc" data-name="SSC">SSC</button>
-          <button class="finding whole-finding btn-zirconia" data-name="Zirconia crown" aria-keyshortcuts="z">(Z) Zirconia</button>
-          <button class="finding whole-finding btn-pfm" data-name="PFM crown" aria-keyshortcuts="p">(P) PFM</button>
-          <button class="finding whole-finding btn-metal" data-name="Metal crown">Metal</button>
-          <button class="finding whole-finding btn-bridge" data-name="Bridge" aria-keyshortcuts="b">(B) Bridge</button>
-          <button class="finding whole-finding btn-implant" data-name="implant">Implant</button>
-        </div>
+        <div class="finding-row"><span class="finding-label">Existing material:</span>
+<span class="existing-material-group"><button class="finding surface-finding btn-composite" data-name="composite" aria-keyshortcuts="c">(C) Composite</button>
+<button class="finding surface-finding btn-amalgam" data-name="amalgam" aria-keyshortcuts="a">(A) Amalgam</button>
+<button class="finding surface-finding btn-sealant" data-name="sealant">Sealant</button>
+<button class="finding surface-finding btn-irm" data-name="IRM">IRM</button></span>
+<span class="existing-material-divider" aria-hidden="true">|</span>
+<span class="existing-material-group"><button class="finding whole-finding btn-ssc" data-name="SSC">SSC</button>
+<button class="finding whole-finding btn-zirconia" data-name="Zirconia crown" aria-keyshortcuts="z">(Z) Zirconia</button>
+<button class="finding whole-finding btn-pfm" data-name="PFM crown" aria-keyshortcuts="p">(P) PFM</button>
+<button class="finding whole-finding btn-metal" data-name="Metal crown">Metal</button>
+<button class="finding whole-finding btn-bridge" data-name="Bridge" aria-keyshortcuts="b">(B) Bridge</button>
+<button class="finding whole-finding btn-implant" data-name="implant">Implant</button></span>
+</div>
         <div class="finding-row"><span class="finding-label">Endo:</span>
           <button class="finding whole-finding btn-rct" data-name="RCT" aria-keyshortcuts="r">(R) RCT</button>
           <button class="finding whole-finding btn-post-core" data-name="post & core">Post & Core</button>
@@ -254,17 +255,23 @@
           <button class="finding whole-finding btn-paro" data-name="PARO">PARO</button>
           <button class="finding whole-finding btn-ankylosis" data-name="ankylosis">Ankylosis</button>
         </div>
-        <div class="finding-row"><span class="finding-label">Non-carious:</span>
-          <button class="finding whole-finding btn-wear" data-name="wear">Wear</button>
-          <button class="finding surface-finding btn-chipped" data-name="chipped">Chipped</button>
-          <button class="finding surface-finding btn-abfraction" data-name="abfraction">Abfraction</button>
-          <button class="finding surface-finding btn-erosion" data-name="erosion">Erosion</button>
-          <button class="finding surface-finding btn-crack" data-name="crack line">Crack Line</button>
-          <button class="finding surface-finding btn-broken" data-name="broken">Broken</button>
-          <button class="finding surface-finding btn-overhang" data-name="overhang">Overhang</button>
-          <button class="finding surface-finding btn-open-margin" data-name="open margin">Open margin</button>
-          <button class="finding surface-finding btn-rest-seat" data-name="rest seat">Rest seat</button>
-        </div>
+        <div class="finding-row noncarious-row"><span class="finding-label">Non-carious:</span>
+<span class="noncarious-group"><button class="finding surface-finding btn-pit" data-name="pit">Pit</button>
+<button class="finding surface-finding btn-deep-groove" data-name="deep groove">Deep groove</button></span>
+<span class="noncarious-divider" aria-hidden="true">|</span>
+<span class="noncarious-group"><button class="finding whole-finding btn-wear" data-name="wear">Wear/Abrasion</button>
+<button class="finding surface-finding btn-abfraction" data-name="abfraction">Abfraction</button>
+<button class="finding surface-finding btn-erosion" data-name="erosion">Erosion</button></span>
+<span class="noncarious-divider" aria-hidden="true">|</span>
+<span class="noncarious-group"><button class="finding surface-finding btn-chipped" data-name="chipped">Chipped</button>
+<button class="finding surface-finding btn-crack" data-name="crack line">Crack line</button>
+<button class="finding surface-finding btn-broken" data-name="broken">Broken</button></span>
+<span class="noncarious-divider" aria-hidden="true">|</span>
+<span class="noncarious-group"><button class="finding surface-finding btn-overhang" data-name="overhang">Overhang</button>
+<button class="finding surface-finding btn-open-margin" data-name="open margin">Open margin</button>
+<button class="finding surface-finding btn-short-margin" data-name="short margin">Short margin</button>
+<button class="finding surface-finding btn-rest-seat" data-name="rest seat">Rest seat</button></span>
+</div>
         <div class="finding-row"><span class="finding-label">Position:</span>
           <button class="finding whole-finding position-button" data-name="mobility">Mobility</button>
           <button class="finding whole-finding position-button" data-name="tilted">Tilted</button>
@@ -289,8 +296,9 @@
         <div class="finding-row"><span class="finding-label">Conservative:</span>
           <button type="button" class="treatment watch-treatment btn-watch" data-treatment="Watch" aria-keyshortcuts="w">(W) Watch</button>
           <button type="button" class="treatment surface-treatment btn-sdf" data-treatment="SDF">SDF</button>
+          <button type="button" class="treatment surface-treatment btn-sealant" data-treatment="Sealant">Sealant</button>
         </div>
-        <div class="finding-row treatment-single-line"><span class="finding-label">Filling:</span>
+        <div class="finding-row treatment-single-line"><span class="finding-label">Restoration:</span>
           <button type="button" class="treatment surface-treatment btn-composite" data-treatment="Composite" aria-keyshortcuts="f">(F) Composite</button>
           <button type="button" class="treatment surface-treatment btn-amalgam" data-treatment="Amalgam">Amalgam</button>
           <button type="button" class="treatment surface-treatment btn-rmgi" data-treatment="RMGI">RMGI</button>
@@ -343,7 +351,7 @@
     </div>
   </dialog>
   <template id="recallPreceptorOptions"><option value="">Choose a preceptor</option><option value="Dr. Benson">Dr. Benson</option><option value="Dr. Calderbank">Dr. Calderbank</option><option value="Dr. Doyle">Dr. Doyle</option><option value="Dr. Goldsmith">Dr. Goldsmith</option><option value="Dr. Gradisek">Dr. Gradisek</option><option value="Dr. Hoch">Dr. Hoch</option><option value="Dr. Kohler">Dr. Kohler</option><option value="Dr. McAllister">Dr. McAllister</option><option value="Dr. Palo">Dr. Palo</option><option value="Dr. Poe">Dr. Poe</option><option value="Dr. Pollock">Dr. Pollock</option><option value="Dr. Roberts">Dr. Roberts</option><option value="Others">Others</option></template>
-  <script src="script.js?v=student-name-1"></script>
+  <script src="script.js?v=dentition-default-20261022"></script>
 
 <script>
 // Preserve one line per category without adding horizontal scrolling.

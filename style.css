@@ -696,3 +696,18 @@ body .note-fields-row.fit-note-fields .cohri-option { white-space: nowrap; }
 /* Position finding: Pericoronitis */
 .position-button[data-name="pericoronitis"],
 .dentition-exam .position-button[data-name="pericoronitis"] { background-color: #f9a8d4; color: #831843; border-color: #f472b6; }
+
+/* Align Recall panels; give Note twice the width of Suggested treatment. */
+body > .cohri-panel,
+body > .cleaning-panel,
+body > .extra-oral-exam,
+body > .oral-screening-panel,
+body > #recallEvaluationArea,
+body > .chart-treatment-layout {
+  width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box;
+}
+@media (min-width: 1101px) {
+  body .chart-treatment-layout:not(.cleaning-only-layout) {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  }
+}

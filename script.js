@@ -368,7 +368,7 @@ const primaryToothMap = {
   4: "A", 5: "B", 6: "C", 7: "D", 8: "E", 9: "F", 10: "G", 11: "H", 12: "I", 13: "J",
   20: "K", 21: "L", 22: "M", 23: "N", 24: "O", 25: "P", 26: "Q", 27: "R", 28: "S", 29: "T"
 };
-const positionFindings = [ "mobility", "tilted", "rotated", "super-eruption", "erupting", "impacted", "unerupted" ];
+const positionFindings = [ "mobility", "tilted", "rotated", "super-eruption", "erupting", "impacted", "unerupted", "pericoronitis" ];
 const mixedPermanentTeeth = [ 3, 14, 19, 30, 7, 8, 9, 10, 23, 24, 25, 26 ];
 createArch("maxillary", maxillaryTeeth);
 createArch("mandibular", mandibularTeeth);
@@ -428,7 +428,7 @@ function createTooth(toothNumber) {
     <text x="60" y="103">${bottomSurface}</text>
     <rect class="surface cervical-surface" data-surface="C" x="15" y="135" width="90" height="40" rx="3" >
     </rect>
-    <text class="cervical-label" x="60" y="155" >C</text>
+    <text class="cervical-label" x="60" y="155" >cervical</text>
     <g class="lengthening-arrows">
     <path d="M35 181 V197 M29 191 L35 197 L41 191" >
     </path>
@@ -718,7 +718,7 @@ function renderFindings() {
   const crownFindings = [ "SSC", "Zirconia crown", "PFM crown", "Metal crown", "implant" ];
   const crownTreatments = [ "CBU", "SSC", "Zirconia", "PFM", "Metal", "Bridge", "bridge", "Implant", "implant" ];
   const fillingTreatments = [ "Composite", "Amalgam", "RMGI", "IRM", "Sealant" ];
-  all(".cervical-label").forEach( label => { label.textContent = "C"; });
+  all(".cervical-label").forEach( label => { label.textContent = "cervical"; });
   all(".root-markers").forEach( marker => { marker.innerHTML = ""; });
   all(".surface").forEach( surface => {
     surface.classList.remove( ...new Set(Object.values(surfaceClasses)) );

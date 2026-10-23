@@ -692,3 +692,7 @@ body .note-fields-row.fit-note-fields .cohri-option { white-space: nowrap; }
 
 .existing-material-group { display:inline-flex; align-items:center; flex-wrap:nowrap; gap:3px; }
 .existing-material-divider { color:var(--muted,#62748b); font-weight:bold; margin:0 3px; }
+
+/* Position finding: Pericoronitis */
+.position-button[data-name="pericoronitis"],
+.dentition-exam .position-button[data-name="pericoronitis"] { background-color: #f9a8d4; color: #831843; border-color: #f472b6; }
